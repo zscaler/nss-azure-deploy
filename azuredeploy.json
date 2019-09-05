@@ -92,7 +92,7 @@
     },
     "vmSize": {
       "type": "string",
-      "defaultValue": "Standard_D1_v2",
+      "defaultValue": "Standard_E4-2s_v3",
       "metadata": {
         "description": "Size of the VM."
       }
@@ -134,8 +134,8 @@
     }
   },
   "variables": {
-    "sourceOSvhdURL": "https://zsprod.blob.core.windows.net/nss/znss_osdisk.vhd",
-    "sourceDataVHDurl": "https://zsprod.blob.core.windows.net/nss/znss_datadisk.vhd",
+    "sourceOSvhdURL": "https://zsprod.blob.core.windows.net/nss/znss_4_0_4_osdisk.vhd",
+    "sourceDataVHDurl": "https://zsprod.blob.core.windows.net/nss/znss_4_0_4_datadisk.vhd",
     "scriptUrl": "https://raw.githubusercontent.com/zscaler/nss-azure-deploy/master/scripts/copyvhd.ps1",
     "vhdStorageAccountNamePrefix": "vhdstorage",
     "vhdStorageAccountName": "[toLower(concat(variables('vhdStorageAccountNamePrefix'), uniqueString(subscription().id, resourceGroup().id, deployment().name)))]",
@@ -690,7 +690,7 @@
             },
             "caching": "ReadWrite",
             "writeAcceleratorEnabled": false,
-            "diskSizeGB": 30
+            "diskSizeGB": 50
           },
           "dataDisks": [
             {
