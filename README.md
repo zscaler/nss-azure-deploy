@@ -25,7 +25,7 @@ Support for this ARM template is made available exclusively through Github repo 
 Zscaler is actively contributing to and maintaining this repo.  
 
   Contributors:
-  [Eddie Parra](https://github.com/eparra), Anoop SV.
+  [Eddie Parra](https://github.com/eparra), [Rohan Upalekar](https://github.com/rohan-zscaler), Anoop SV.
 
 ## Licensing
 
