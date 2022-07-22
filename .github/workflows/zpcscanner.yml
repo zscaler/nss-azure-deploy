@@ -1,7 +1,17 @@
 ---
 name: Zscanner IAC Scan
-on: [push]
+on:
+  # Trigger the workflow on push or pull request
+  # but only for the master branch
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
 jobs:
+
   zscaler-iac-scan:
     runs-on: ubuntu-latest
     steps:
