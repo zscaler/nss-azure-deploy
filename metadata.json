@@ -1,0 +1,9 @@
+{
+  "$schema": "https://aka.ms/azure-quickstart-templates-metadata-schema#",
+  "type": "QuickStart",
+  "itemDisplayName": "Deploy a single Zscaler NSS Virtual Machine",
+  "description": "This template deploys a single Zscaler NSS Virtual Machine.",
+  "summary": "Deploy a Zscaler NSS Virtual Machine",
+  "githubUsername": "willguibr",
+  "dateUpdated": "2022-07-19"
+}
