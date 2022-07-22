@@ -46,7 +46,7 @@ jobs:
 
       - name: Create release and publish
         id: release
-        uses: cycjimmy/semantic-release-action@v3
+        uses: cycjimmy/semantic-release-action@v2
         with:
           semantic_version: 19.0.3
           extra_plugins: |
