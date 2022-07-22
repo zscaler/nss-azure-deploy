@@ -33,6 +33,7 @@
     },
     "SAS-Token": {
       "type": "string",
+      "defaultValue": "",
       "metadata": {
         "description": "SAS Token for Zscaler's VHDs. Contact Zscaler Support to receive the token. Example of SAS token: sp=r&st=2019-05-07T03:18:56Z&se=2020-05-31T11:18:56Z&spr=https&sv=2018-03-28&sig=AmDuefmdf7lNjrF0aOdUenpuwmo4F5uq7X2oFFtHTzg%3D&sr=b"
       }
@@ -134,15 +135,13 @@
     }
   },
   "variables": {
-    "sourceOSvhdURL": "https://zsprod.blob.core.windows.net/nss/znss_4_0_4_osdisk.vhd",
-    "sourceDataVHDurl": "https://zsprod.blob.core.windows.net/nss/znss_4_0_4_datadisk.vhd",
-    "scriptUrl": "https://raw.githubusercontent.com/zscaler/nss-azure-deploy/master/scripts/copyvhd.ps1",
+    "sourceOSvhdURL": "https://zsprod.blob.core.windows.net/nss/znss_5_0_osdisk.vhd",
+    "scriptUrl": "https://raw.githubusercontent.com/willguibr/nss-azure-deploy/main/scripts/copyvhd.ps1",
     "vhdStorageAccountNamePrefix": "vhdstorage",
     "vhdStorageAccountName": "[toLower(concat(variables('vhdStorageAccountNamePrefix'), uniqueString(subscription().id, resourceGroup().id, deployment().name)))]",
     "vhdStorageAccountSKU": "Standard_LRS",
-    "vhdStorageAccountContainerName": "zscalernsscontainerprod",
+    "vhdStorageAccountContainerName": "zscalernssrprod",
     "destOSvhdName": "znss_osdisk.vhd",
-    "destDataVHDname": "znss_datadisk.vhd",
     "automationAccountNamePrefix": "VHDcopy-Automation",
     "automationAccountName": "[concat(variables('automationAccountNamePrefix'), '-', uniqueString(subscription().id, resourceGroup().id, deployment().name))]",
     "automationSKU": "Basic",
@@ -151,20 +150,17 @@
     "psModules": {
       "azAccounts": {
         "name": "Az.Accounts",
-        "url": "https://github.com/zscaler/nss-azure-deploy/raw/master/assets/az.accounts.1.5.1.nupkg"
+        "url": "https://github.com/willguibr/nss-azure-deploy/raw/main/assets/az.accounts.1.5.1.nupkg"
       },
       "azStorage": {
         "name": "Az.Storage",
-        "url": "https://github.com/zscaler/nss-azure-deploy/raw/master/assets/az.storage.1.2.0.nupkg"
+        "url": "https://github.com/willguibr/nss-azure-deploy/raw/main/assets/az.storage.1.2.0.nupkg"
       }
     },
     "subnetRef": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'),  parameters('subnetName'))]",
     "destinationOSvhdURL": "[concat('https://',variables('vhdStorageAccountName'), '.blob.core.windows.net/', variables('vhdStorageAccountContainerName'), '/', variables('destOSvhdName'))]",
-    "destinationDataVHDurl": "[concat('https://',variables('vhdStorageAccountName'), '.blob.core.windows.net/', variables('vhdStorageAccountContainerName'), '/', variables('destDataVHDname'))]",
     "uniqueBase1": "[toLower(uniqueString(parameters('virtualNetworkName'), resourceGroup().id))]",
-    "uniqueBase2": "[toLower(uniqueString(parameters('vmName'), resourceGroup().id))]",
-    "guid1": "[concat(substring(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(concat(variables('uniqueBase1'),variables('uniqueBase1'),substring(variables('uniqueBase1'),0,10)),'g','0'),'h','1'),'i','2'),'j','3'),'k','4'),'l','5'),'m','6'),'n','7'),'o','8'),'p','9'),'q','a'),'r','b'),'s','c'),'t','d'),'u','e'),'v','f'),'w','0'),'x','1'),'y','2'),'z','3'),0,8),'-',substring(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(concat(variables('uniqueBase1'),variables('uniqueBase1'),substring(variables('uniqueBase1'),0,10)),'g','0'),'h','1'),'i','2'),'j','3'),'k','4'),'l','5'),'m','6'),'n','7'),'o','8'),'p','9'),'q','a'),'r','b'),'s','c'),'t','d'),'u','e'),'v','f'),'w','0'),'x','1'),'y','2'),'z','3'),9,4),'-',substring(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(concat(variables('uniqueBase1'),variables('uniqueBase1'),substring(variables('uniqueBase1'),0,10)),'g','0'),'h','1'),'i','2'),'j','3'),'k','4'),'l','5'),'m','6'),'n','7'),'o','8'),'p','9'),'q','a'),'r','b'),'s','c'),'t','d'),'u','e'),'v','f'),'w','0'),'x','1'),'y','2'),'z','3'),14,4),'-',substring(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(concat(variables('uniqueBase1'),variables('uniqueBase1'),substring(variables('uniqueBase1'),0,10)),'g','0'),'h','1'),'i','2'),'j','3'),'k','4'),'l','5'),'m','6'),'n','7'),'o','8'),'p','9'),'q','a'),'r','b'),'s','c'),'t','d'),'u','e'),'v','f'),'w','0'),'x','1'),'y','2'),'z','3'),19,4),'-',substring(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(concat(variables('uniqueBase1'),variables('uniqueBase1'),substring(variables('uniqueBase1'),0,10)),'g','0'),'h','1'),'i','2'),'j','3'),'k','4'),'l','5'),'m','6'),'n','7'),'o','8'),'p','9'),'q','a'),'r','b'),'s','c'),'t','d'),'u','e'),'v','f'),'w','0'),'x','1'),'y','2'),'z','3'),24,12))]",
-    "guid2": "[concat(substring(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(concat(variables('uniqueBase2'),variables('uniqueBase2'),substring(variables('uniqueBase2'),0,10)),'g','0'),'h','1'),'i','2'),'j','3'),'k','4'),'l','5'),'m','6'),'n','7'),'o','8'),'p','9'),'q','a'),'r','b'),'s','c'),'t','d'),'u','e'),'v','f'),'w','0'),'x','1'),'y','2'),'z','3'),0,8),'-',substring(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(concat(variables('uniqueBase2'),variables('uniqueBase2'),substring(variables('uniqueBase2'),0,10)),'g','0'),'h','1'),'i','2'),'j','3'),'k','4'),'l','5'),'m','6'),'n','7'),'o','8'),'p','9'),'q','a'),'r','b'),'s','c'),'t','d'),'u','e'),'v','f'),'w','0'),'x','1'),'y','2'),'z','3'),9,4),'-',substring(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(concat(variables('uniqueBase2'),variables('uniqueBase2'),substring(variables('uniqueBase2'),0,10)),'g','0'),'h','1'),'i','2'),'j','3'),'k','4'),'l','5'),'m','6'),'n','7'),'o','8'),'p','9'),'q','a'),'r','b'),'s','c'),'t','d'),'u','e'),'v','f'),'w','0'),'x','1'),'y','2'),'z','3'),14,4),'-',substring(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(concat(variables('uniqueBase2'),variables('uniqueBase2'),substring(variables('uniqueBase2'),0,10)),'g','0'),'h','1'),'i','2'),'j','3'),'k','4'),'l','5'),'m','6'),'n','7'),'o','8'),'p','9'),'q','a'),'r','b'),'s','c'),'t','d'),'u','e'),'v','f'),'w','0'),'x','1'),'y','2'),'z','3'),19,4),'-',substring(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(concat(variables('uniqueBase2'),variables('uniqueBase2'),substring(variables('uniqueBase2'),0,10)),'g','0'),'h','1'),'i','2'),'j','3'),'k','4'),'l','5'),'m','6'),'n','7'),'o','8'),'p','9'),'q','a'),'r','b'),'s','c'),'t','d'),'u','e'),'v','f'),'w','0'),'x','1'),'y','2'),'z','3'),24,12))]"
+    "guid1": "[concat(substring(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(concat(variables('uniqueBase1'),variables('uniqueBase1'),substring(variables('uniqueBase1'),0,10)),'g','0'),'h','1'),'i','2'),'j','3'),'k','4'),'l','5'),'m','6'),'n','7'),'o','8'),'p','9'),'q','a'),'r','b'),'s','c'),'t','d'),'u','e'),'v','f'),'w','0'),'x','1'),'y','2'),'z','3'),0,8),'-',substring(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(concat(variables('uniqueBase1'),variables('uniqueBase1'),substring(variables('uniqueBase1'),0,10)),'g','0'),'h','1'),'i','2'),'j','3'),'k','4'),'l','5'),'m','6'),'n','7'),'o','8'),'p','9'),'q','a'),'r','b'),'s','c'),'t','d'),'u','e'),'v','f'),'w','0'),'x','1'),'y','2'),'z','3'),9,4),'-',substring(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(concat(variables('uniqueBase1'),variables('uniqueBase1'),substring(variables('uniqueBase1'),0,10)),'g','0'),'h','1'),'i','2'),'j','3'),'k','4'),'l','5'),'m','6'),'n','7'),'o','8'),'p','9'),'q','a'),'r','b'),'s','c'),'t','d'),'u','e'),'v','f'),'w','0'),'x','1'),'y','2'),'z','3'),14,4),'-',substring(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(concat(variables('uniqueBase1'),variables('uniqueBase1'),substring(variables('uniqueBase1'),0,10)),'g','0'),'h','1'),'i','2'),'j','3'),'k','4'),'l','5'),'m','6'),'n','7'),'o','8'),'p','9'),'q','a'),'r','b'),'s','c'),'t','d'),'u','e'),'v','f'),'w','0'),'x','1'),'y','2'),'z','3'),19,4),'-',substring(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(concat(variables('uniqueBase1'),variables('uniqueBase1'),substring(variables('uniqueBase1'),0,10)),'g','0'),'h','1'),'i','2'),'j','3'),'k','4'),'l','5'),'m','6'),'n','7'),'o','8'),'p','9'),'q','a'),'r','b'),'s','c'),'t','d'),'u','e'),'v','f'),'w','0'),'x','1'),'y','2'),'z','3'),24,12))]"
   },
   "resources": [
     {
@@ -285,31 +281,6 @@
               "newStorageAccountContainerName": "[variables('vhdStorageAccountContainerName')]",
               "destVHDname": "[variables('destOSvhdName')]",
               "vhdURL": "[variables('sourceOSvhdURL')]",
-              "sasToken": "[parameters('SAS-Token')]"
-            }
-          }
-        },
-        {
-          "name": "[variables('guid2')]",
-          "type": "jobs",
-          "apiVersion": "2015-01-01-preview",
-          "location": "[parameters('location')]",
-          "dependsOn": [
-            "[concat('Microsoft.Storage/storageAccounts/', variables('vhdStorageAccountName'))]",
-            "[concat('Microsoft.Automation/automationAccounts/', variables('automationAccountName'))]",
-            "[concat('Microsoft.Automation/automationAccounts/', variables('automationAccountName'), '/runbooks/',variables('runbookName'))]",
-            "[concat('Microsoft.Automation/automationAccounts/', variables('automationAccountName'), '/Modules/', variables('psModules').azAccounts.name)]",
-            "[concat('Microsoft.Automation/automationAccounts/', variables('automationAccountName'), '/Modules/', variables('psModules').azStorage.name)]"
-          ],
-          "properties": {
-            "runbook": {
-              "name": "[variables('runbookName')]"
-            },
-            "parameters": {
-              "newStorageAccountName": "[variables('vhdStorageAccountName')]",
-              "newStorageAccountContainerName": "[variables('vhdStorageAccountContainerName')]",
-              "destVHDname": "[variables('destDataVHDname')]",
-              "vhdURL": "[variables('sourceDataVHDurl')]",
               "sasToken": "[parameters('SAS-Token')]"
             }
           }
@@ -673,8 +644,7 @@
       "dependsOn": [
         "[resourceId('Microsoft.Network/networkInterfaces', parameters('nic1name'))]",
         "[resourceId('Microsoft.Network/networkInterfaces', parameters('nic2name'))]",
-        "[concat('Microsoft.Automation/automationAccounts/', variables('automationAccountName'), '/', 'jobs', '/', variables('guid1'))]",
-        "[concat('Microsoft.Automation/automationAccounts/', variables('automationAccountName'), '/', 'jobs', '/', variables('guid2'))]"
+        "[concat('Microsoft.Automation/automationAccounts/', variables('automationAccountName'), '/', 'jobs', '/', variables('guid1'))]"
       ],
       "properties": {
         "hardwareProfile": {
@@ -690,20 +660,9 @@
             },
             "caching": "ReadWrite",
             "writeAcceleratorEnabled": false,
-            "diskSizeGB": 50
+            "diskSizeGB": 600
           },
           "dataDisks": [
-            {
-              "lun": 0,
-              "name": "sc",
-              "createOption": "Attach",
-              "vhd": {
-                "uri": "[variables('destinationDataVHDurl')]"
-              },
-              "caching": "None",
-              "writeAcceleratorEnabled": false,
-              "diskSizeGB": 500
-            }
           ]
         },
         "networkProfile": {
