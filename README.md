@@ -1,3 +1,6 @@
+[![Zscanner IAC Scan](https://github.com/zscaler/nss-azure-deploy/actions/workflows/ci.yml/badge.svg)](https://github.com/zscaler/nss-azure-deploy/actions/workflows/ci.yml)
+[![License](https://img.shields.io/github/license/zscaler/nss-azure-deploy?color=blue)](https://github.com/zscaler/nss-azure-deploy/blob/master/LICENSE)
+[![Zscaler Community](https://img.shields.io/badge/zscaler-community-blue)](https://community.zscaler.com/)
 # Zscaler NSS Azure Resource Manager (ARM) Template
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fzscaler%2Fnss-azure-deploy%2Fmaster%2Fazuredeploy.json)
