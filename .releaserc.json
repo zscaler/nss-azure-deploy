@@ -23,15 +23,25 @@
             "@semantic-release/git",
             {
                 "assets": [
-                    "README.md"
+                    "README.md",
+                    "CHANGELOG.md"
                 ],
-                "message": "chore(release): ${nextRelease.version}\n\n${nextRelease.notes}"
+                "message": "chore(release): version ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
             }
         ],
         [
+            "@semantic-release/changelog",
+            {
+              "changelogFile": "CHANGELOG.md",
+              "changelogTitle": "# Changelog\n\nAll notable changes to this project will be documented in this file."
+            }
+          ],
+        [
             "@semantic-release/github",
             {
-                "successComment": ":tada: This ${issue.pull_request ? 'PR is included' : 'issue has been resolved'} in version ${nextRelease.version} :tada:\n\nThe release is available on [Zscaler GitHub](https://github.com/zscaler/nss-azure-deploy/releases) and [GitHub release](../releases/tag/v${nextRelease.version})\n\n> Posted by [semantic-release](https://github.com/semantic-release/semantic-release) bot"
+                "successComment": ":tada: This ${issue.pull_request ? 'PR is included' : 'issue has been resolved'} in version ${nextRelease.version} :tada:\n\nThe release is available on [Zscaler GitHub](https://github.com/zscaler/nss-azure-deploy/releases) and [GitHub release](../releases/tag/v${nextRelease.version})\n\n> Posted by [semantic-release](https://github.com/semantic-release/semantic-release) bot",
+                "labels": false,
+                "releasedLabels": false
             }
         ]
     ],
