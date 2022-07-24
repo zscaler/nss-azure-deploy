@@ -11,6 +11,8 @@
 
 This repository contains an Azure Resource Manager (ARM) template for deploying Zscaler Nanolog Streaming Service (NSS) in Azure cloud.  This ARM template will launch NSS, but at this time, you are required to modify the Network Service Groups (NSGs) to properly secure inbound connections based on your environment.
 
+>> Note: :warning: The template takes about 20-30 minutes to deploy, mostly because the new image is around 600GB+, so be patient and don’t cancel the deployment once it is running.
+
 ## Support and Reporting Issues
 
 Support for this ARM template is made available exclusively through Github repo issue tracking.  You are also welcome to contact the contributors directly via their provided contact information.  If you find a bug, please open an issue against this repo [here](https://github.com/zscaler/nss-azure-deploy/issues).
