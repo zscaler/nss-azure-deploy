@@ -5,5 +5,8 @@
   "description": "This template deploys a single Zscaler NSS Virtual Machine.",
   "summary": "Deploy a Zscaler NSS Virtual Machine",
   "githubUsername": "willguibr",
-  "dateUpdated": "2022-07-19"
+  "dateUpdated": "2022-11-20",
+  "environments": [
+    "AzureCloud"
+  ]
 }
