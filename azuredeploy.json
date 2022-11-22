@@ -34,13 +34,6 @@
         "description": "Specify whether to create a new or use existing storage account."
       }
     },
-    "storageAccountName": {
-      "type": "string",
-      "defaultValue": "znssstorage",
-      "metadata": {
-        "description": "If storageAccountNewOrExisting is set to existing, than specify the Storage Account Name that already exist. If storageAccountNewOrExisting is set to new, than provide the name for the new Storage Account name. Existing Storage Account name must be located in the same location as to where this template is being deployed."
-      }
-    },
     "location": {
       "type": "string",
       "defaultValue": "[resourceGroup().location]",
@@ -159,7 +152,8 @@
   "variables": {
     "sourceOSvhdURL": "https://zsprod.blob.core.windows.net/nss/znss_5_1_osdisk.vhd",
     "scriptUrl": "https://raw.githubusercontent.com/zscaler/nss-azure-deploy/master/scripts/copyvhd.ps1",
-    "storageAccountName": "[concat(parameters('storageAccountName'),'vhdstorage')]",
+    "vhdStorageAccountNamePrefix": "vhdstorage",
+    "vhdStorageAccountName": "[toLower(concat(variables('vhdStorageAccountNamePrefix'), uniqueString(subscription().id, resourceGroup().id, deployment().name)))]",
     "vhdStorageAccountSKU": "Standard_LRS",
     "vhdStorageAccountContainerName": "zscalernssrprod",
     "destOSvhdName": "znss_osdisk.vhd",
@@ -180,7 +174,7 @@
     },
     "subnetRef": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'),  parameters('subnetName'))]",
     "subnetRef2": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'),  parameters('subnetName2'))]",
-    "destinationOSvhdURL": "[concat('https://',variables('storageAccountName'), '.blob.core.windows.net/', variables('vhdStorageAccountContainerName'), '/', variables('destOSvhdName'))]",
+    "destinationOSvhdURL": "[concat('https://',variables('vhdStorageAccountName'), '.blob.core.windows.net/', variables('vhdStorageAccountContainerName'), '/', variables('destOSvhdName'))]",
     "uniqueBase1": "[toLower(uniqueString(parameters('virtualNetworkName'), resourceGroup().id))]",
     "guid1": "[concat(substring(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(concat(variables('uniqueBase1'),variables('uniqueBase1'),substring(variables('uniqueBase1'),0,10)),'g','0'),'h','1'),'i','2'),'j','3'),'k','4'),'l','5'),'m','6'),'n','7'),'o','8'),'p','9'),'q','a'),'r','b'),'s','c'),'t','d'),'u','e'),'v','f'),'w','0'),'x','1'),'y','2'),'z','3'),0,8),'-',substring(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(concat(variables('uniqueBase1'),variables('uniqueBase1'),substring(variables('uniqueBase1'),0,10)),'g','0'),'h','1'),'i','2'),'j','3'),'k','4'),'l','5'),'m','6'),'n','7'),'o','8'),'p','9'),'q','a'),'r','b'),'s','c'),'t','d'),'u','e'),'v','f'),'w','0'),'x','1'),'y','2'),'z','3'),9,4),'-',substring(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(concat(variables('uniqueBase1'),variables('uniqueBase1'),substring(variables('uniqueBase1'),0,10)),'g','0'),'h','1'),'i','2'),'j','3'),'k','4'),'l','5'),'m','6'),'n','7'),'o','8'),'p','9'),'q','a'),'r','b'),'s','c'),'t','d'),'u','e'),'v','f'),'w','0'),'x','1'),'y','2'),'z','3'),14,4),'-',substring(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(concat(variables('uniqueBase1'),variables('uniqueBase1'),substring(variables('uniqueBase1'),0,10)),'g','0'),'h','1'),'i','2'),'j','3'),'k','4'),'l','5'),'m','6'),'n','7'),'o','8'),'p','9'),'q','a'),'r','b'),'s','c'),'t','d'),'u','e'),'v','f'),'w','0'),'x','1'),'y','2'),'z','3'),19,4),'-',substring(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(concat(variables('uniqueBase1'),variables('uniqueBase1'),substring(variables('uniqueBase1'),0,10)),'g','0'),'h','1'),'i','2'),'j','3'),'k','4'),'l','5'),'m','6'),'n','7'),'o','8'),'p','9'),'q','a'),'r','b'),'s','c'),'t','d'),'u','e'),'v','f'),'w','0'),'x','1'),'y','2'),'z','3'),24,12))]"
   },
@@ -188,7 +182,7 @@
     {
       "condition": "[equals(parameters('storageAccountNewOrExisting'), 'new')]",
       "type": "Microsoft.Storage/storageAccounts",
-      "name": "[variables('storageAccountName')]",
+      "name": "[variables('vhdStorageAccountName')]",
       "location": "[parameters('location')]",
       "apiVersion": "2022-05-01",
       "sku": {
@@ -221,9 +215,9 @@
         {
           "apiVersion": "2022-05-01",
           "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
-          "name": "[concat(variables('storageAccountName'),'/default/', variables('vhdStorageAccountContainerName'))]",
+          "name": "[concat(variables('vhdStorageAccountName'),'/default/', variables('vhdStorageAccountContainerName'))]",
           "dependsOn": [
-            "[concat('Microsoft.Storage/storageAccounts/', variables('storageAccountName'))]"
+            "[concat('Microsoft.Storage/storageAccounts/', variables('vhdStorageAccountName'))]"
           ]
         }
       ]
@@ -234,7 +228,7 @@
       "apiVersion": "2021-06-22",
       "location": "[parameters('location')]",
       "dependsOn": [
-        "[resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName'))]"
+        "[resourceId('Microsoft.Storage/storageAccounts', variables('vhdStorageAccountName'))]"
       ],
       "properties": {
         "sku": {
@@ -252,7 +246,7 @@
           ],
           "properties": {
             "userName": "unusedUsername",
-            "password": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2021-09-01').keys[0].value]",
+            "password": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('vhdStorageAccountName')), '2021-09-01').keys[0].value]",
             "description": "string"
           }
         },
@@ -310,7 +304,7 @@
           "apiVersion": "2019-06-01",
           "location": "[parameters('location')]",
           "dependsOn": [
-            "[concat('Microsoft.Storage/storageAccounts/', variables('storageAccountName'))]",
+            "[concat('Microsoft.Storage/storageAccounts/', variables('vhdStorageAccountName'))]",
             "[concat('Microsoft.Automation/automationAccounts/', variables('automationAccountName'))]",
             "[concat('Microsoft.Automation/automationAccounts/', variables('automationAccountName'), '/runbooks/',variables('runbookName'))]",
             "[concat('Microsoft.Automation/automationAccounts/', variables('automationAccountName'), '/Modules/', variables('psModules').azAccounts.name)]",
@@ -321,12 +315,12 @@
               "name": "[variables('runbookName')]"
             },
             "parameters": {
-              "newStorageAccountName": "[variables('storageAccountName')]",
+              "newStorageAccountName": "[variables('vhdStorageAccountName')]",
               "newStorageAccountContainerName": "[variables('vhdStorageAccountContainerName')]",
               "destVHDname": "[variables('destOSvhdName')]",
               "vhdURL": "[variables('sourceOSvhdURL')]",
               "sasToken": "[parameters('SAS-Token')]",
-              "StorageAccountKey": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('storageAccountName')), '2021-09-01').keys[0].value]"
+              "StorageAccountKey": "[listKeys(resourceId('Microsoft.Storage/storageAccounts', variables('vhdStorageAccountName')), '2021-09-01').keys[0].value]"
             }
           }
         }
