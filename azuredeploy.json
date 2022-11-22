@@ -77,7 +77,7 @@
       "type": "string",
       "defaultValue": "Zscaler-NSS-Subnet",
       "metadata": {
-        "description": "If vNetNewOrExisting is set to existing, than specify the subnet that alredy exist. If vNetNewOrExisting is set to new, than provide name for the new subnet. The name must begin with a letter or number, end with a letter, number or underscore, and may contain only letters, numbers, underscores, periods, or hyphens. The name must be between 1 and 80 characters."
+        "description": "If vNetNewOrExisting is set to existing, than specify the subnet that already exist. If vNetNewOrExisting is set to new, than provide name for the new subnet. The name must begin with a letter or number, end with a letter, number or underscore, and may contain only letters, numbers, underscores, periods, or hyphens. The name must be between 1 and 80 characters."
       }
     },
     "subnetName2": {
@@ -138,7 +138,7 @@
     },
     "natGatewayName": {
       "type": "string",
-      "defaultValue": "nssnatgw"
+      "defaultValue": "ZNSS-NAT-GW"
     },
     "SKU": {
       "type": "string",
@@ -150,7 +150,6 @@
     }
   },
   "variables": {
-    "subnetRef2": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'),  parameters('subnetName2'))]",
     "sourceOSvhdURL": "https://zsprod.blob.core.windows.net/nss/znss_5_1_osdisk.vhd",
     "scriptUrl": "https://raw.githubusercontent.com/zscaler/nss-azure-deploy/master/scripts/copyvhd.ps1",
     "vhdStorageAccountName": "[if(not(empty(parameters('vhdStorageAccountName'))),parameters('vhdStorageAccountName'),'vhdstorage')]",
@@ -173,6 +172,7 @@
       }
     },
     "subnetRef": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'),  parameters('subnetName'))]",
+    "subnetRef2": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'),  parameters('subnetName2'))]",
     "destinationOSvhdURL": "[concat('https://',variables('vhdStorageAccountName'), '.blob.core.windows.net/', variables('vhdStorageAccountContainerName'), '/', variables('destOSvhdName'))]",
     "uniqueBase1": "[toLower(uniqueString(parameters('virtualNetworkName'), resourceGroup().id))]",
     "guid1": "[concat(substring(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(concat(variables('uniqueBase1'),variables('uniqueBase1'),substring(variables('uniqueBase1'),0,10)),'g','0'),'h','1'),'i','2'),'j','3'),'k','4'),'l','5'),'m','6'),'n','7'),'o','8'),'p','9'),'q','a'),'r','b'),'s','c'),'t','d'),'u','e'),'v','f'),'w','0'),'x','1'),'y','2'),'z','3'),0,8),'-',substring(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(concat(variables('uniqueBase1'),variables('uniqueBase1'),substring(variables('uniqueBase1'),0,10)),'g','0'),'h','1'),'i','2'),'j','3'),'k','4'),'l','5'),'m','6'),'n','7'),'o','8'),'p','9'),'q','a'),'r','b'),'s','c'),'t','d'),'u','e'),'v','f'),'w','0'),'x','1'),'y','2'),'z','3'),9,4),'-',substring(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(concat(variables('uniqueBase1'),variables('uniqueBase1'),substring(variables('uniqueBase1'),0,10)),'g','0'),'h','1'),'i','2'),'j','3'),'k','4'),'l','5'),'m','6'),'n','7'),'o','8'),'p','9'),'q','a'),'r','b'),'s','c'),'t','d'),'u','e'),'v','f'),'w','0'),'x','1'),'y','2'),'z','3'),14,4),'-',substring(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(concat(variables('uniqueBase1'),variables('uniqueBase1'),substring(variables('uniqueBase1'),0,10)),'g','0'),'h','1'),'i','2'),'j','3'),'k','4'),'l','5'),'m','6'),'n','7'),'o','8'),'p','9'),'q','a'),'r','b'),'s','c'),'t','d'),'u','e'),'v','f'),'w','0'),'x','1'),'y','2'),'z','3'),19,4),'-',substring(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(concat(variables('uniqueBase1'),variables('uniqueBase1'),substring(variables('uniqueBase1'),0,10)),'g','0'),'h','1'),'i','2'),'j','3'),'k','4'),'l','5'),'m','6'),'n','7'),'o','8'),'p','9'),'q','a'),'r','b'),'s','c'),'t','d'),'u','e'),'v','f'),'w','0'),'x','1'),'y','2'),'z','3'),24,12))]"
