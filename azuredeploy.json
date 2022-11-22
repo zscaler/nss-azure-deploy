@@ -194,8 +194,29 @@
       "sku": {
         "name": "[variables('vhdStorageAccountSKU')]"
       },
+      "identity": {
+          "type": "SystemAssigned"
+      },
       "dependsOn": [],
       "kind": "StorageV2",
+      "properties": {
+          "encryption": {
+              "keySource": "Microsoft.Storage",
+              "services": {
+                  "blob": {
+                      "enabled": true
+                  },
+                  "file": {
+                      "enabled": true
+                  }
+              }
+          },
+          "networkAcls": {
+              "bypass": "AzureServices",
+              "defaultAction": "Deny"
+          },
+          "supportsHttpsTrafficOnly": true
+      },
       "resources": [
         {
           "apiVersion": "2022-05-01",
