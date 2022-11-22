@@ -180,7 +180,6 @@
   },
   "resources": [
     {
-      "condition": "[equals(parameters('storageAccountNewOrExisting'), 'new')]",
       "type": "Microsoft.Storage/storageAccounts",
       "name": "[variables('vhdStorageAccountName')]",
       "location": "[parameters('location')]",
@@ -193,24 +192,6 @@
       },
       "dependsOn": [],
       "kind": "StorageV2",
-      "properties": {
-          "encryption": {
-              "keySource": "Microsoft.Storage",
-              "services": {
-                  "blob": {
-                      "enabled": true
-                  },
-                  "file": {
-                      "enabled": true
-                  }
-              }
-          },
-          "networkAcls": {
-              "bypass": "AzureServices",
-              "defaultAction": "Deny"
-          },
-          "supportsHttpsTrafficOnly": true
-      },
       "resources": [
         {
           "apiVersion": "2022-05-01",
