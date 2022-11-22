@@ -23,17 +23,6 @@
         "description": "SAS Token for Zscaler's VHDs. Contact Zscaler Support to receive the token. Example of SAS token: sp=r&st=2019-05-07T03:18:56Z&se=2020-05-31T11:18:56Z&spr=https&sv=2018-03-28&sig=AmDuefmdf7lNjrF0aOdUenpuwmo4F5uq7X2oFFtHTzg%3D&sr=b"
       }
     },
-    "storageAccountNewOrExisting": {
-      "type": "string",
-      "defaultValue": "new",
-      "allowedValues": [
-        "new",
-        "existing"
-      ],
-      "metadata": {
-        "description": "Specify whether to create a new or use existing storage account."
-      }
-    },
     "location": {
       "type": "string",
       "defaultValue": "[resourceGroup().location]",
