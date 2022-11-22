@@ -151,7 +151,7 @@
   },
   "variables": {
     "subnetRef2": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'),  parameters('subnetName2'))]",
-    "sourceOSvhdURL": "https://zsprod.blob.core.windows.net/nss/znss_5_0_osdisk.vhd",
+    "sourceOSvhdURL": "https://zsprod.blob.core.windows.net/nss/znss_5_1_osdisk.vhd",
     "scriptUrl": "https://raw.githubusercontent.com/zscaler/nss-azure-deploy/master/scripts/copyvhd.ps1",
     "vhdStorageAccountName": "[if(not(empty(parameters('vhdStorageAccountName'))),parameters('vhdStorageAccountName'),'vhdstorage')]",
     "vhdStorageAccountSKU": "Standard_LRS",
