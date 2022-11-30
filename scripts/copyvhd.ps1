@@ -1,23 +1,23 @@
-﻿ param(
+﻿param(
 
         [Parameter(Mandatory=$true)]
-        [string] 
+        [string]
         $newStorageAccountName,
 
         [Parameter(Mandatory=$true)]
-        [string] 
+        [string]
         $newStorageAccountContainerName,
-    
+
         [Parameter(Mandatory=$true)]
-        [string] 
+        [string]
         $destVHDname,
 
         [Parameter(Mandatory=$true)]
-        [string] 
+        [string]
         $vhdURL,
 
         [Parameter(Mandatory=$true)]
-        [string] 
+        [string]
         $sasToken
 
 )
@@ -30,7 +30,6 @@ $newStorageAccountAccessKey1 = $myCredential.GetNetworkCredential().Password
 $Context = New-AzStorageContext -StorageAccountName $newStorageAccountName -StorageAccountKey $newStorageAccountAccessKey1
 $sasVHDurl=$vhdURL+$sasToken
 
-$Context = New-AzStorageContext -StorageAccountName $newStorageAccountName -StorageAccountKey $newStorageAccountKey
 Start-AzStorageBlobCopy -AbsoluteUri $sasVHDurl -DestContainer $newStorageAccountContainerName -DestBlob $destVHDname -DestContext $Context
 
 $vhdCopyStatus=Get-AzStorageBlobCopyState -Context $Context -Container $newStorageAccountContainerName -Blob $destVHDname
