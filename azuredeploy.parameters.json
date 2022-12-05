@@ -6,19 +6,19 @@
       "value": "GEN-UNIQUE-10"
     },
     "virtualMachineSize": {
-      "value": "Standard_E4-2s_v3"
+      "value": "Standard_D2_v4"
     },
-    "vnetNewOrExisting": {
-      "value": "new"
+    "SAS-Token": {
+      "value": "sas-token-value"
     },
     "stgNewOrExisting": {
       "value": "new"
     },
+    "vnetNewOrExisting": {
+      "value": "new"
+    },
     "virtualNetworkName": {
       "value": "GET-PREREQ-virtualNetworkName"
-    },
-    "SAS-Token": {
-      "value": "sas-token-value"
     },
     "existingStorageAccount": {
       "value": "exisitingstgname"
