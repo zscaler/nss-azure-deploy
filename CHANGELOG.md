@@ -8,8 +8,8 @@
 
 ### Fixes
 
-- [PR #5](https://github.com/zscaler/terraform-provider-zia/pull/5) Updated template to support latest NSS VHD image 5.1.0
-- [PR #5](https://github.com/zscaler/terraform-provider-zia/pull/5) Added support for VHD image download across multiple regions. The template now allows the selection of which Zscaler Storage account region the VHD image should be transferred from.
+- [PR #5](https://github.com/zscaler/nss-azure-deploy/pull/5) Updated template to support latest NSS VHD image 5.1.0
+- [PR #5](https://github.com/zscaler/nss-azure-deploy/pull/5) Added support for VHD image download across multiple regions. The template now allows the selection of which Zscaler Storage account region the VHD image should be transferred from.
 
 ## 1.0.1 (November, 30 2022)
 
@@ -19,10 +19,10 @@
 
 ### Fixes
 
-- [PR #4](https://github.com/zscaler/terraform-provider-zia/pull/4) Updated ``sourceOSvhdURL`` variable value to download the latest NSS VHD image 5.1.0.
-- [PR #4](https://github.com/zscaler/terraform-provider-zia/pull/4) Added condition ``new`` / ``existing`` for storage account creation.
-- [PR #4](https://github.com/zscaler/terraform-provider-zia/pull/4) Fixed ``copyvhd.ps1`` so storage account key and account name is parsed correctly
-- [PR #4](https://github.com/zscaler/terraform-provider-zia/pull/4) Removed ``nukpg`` files. The template will pull the nupkg files from Azure Assets portal directly.
+- [PR #4](https://github.com/zscaler/nss-azure-deploy/pull/4) Updated ``sourceOSvhdURL`` variable value to download the latest NSS VHD image 5.1.0.
+- [PR #4](https://github.com/zscaler/nss-azure-deploy/pull/4) Added condition ``new`` / ``existing`` for storage account creation.
+- [PR #4](https://github.com/zscaler/nss-azure-deploy/pull/4) Fixed ``copyvhd.ps1`` so storage account key and account name is parsed correctly
+- [PR #4](https://github.com/zscaler/nss-azure-deploy/pull/4) Removed ``nukpg`` files. The template will pull the nupkg files from Azure Assets portal directly.
 
 ## 1.0.0 (2022-07-22)
 
