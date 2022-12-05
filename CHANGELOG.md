@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.1.0 (December, 5 2022)
+
+### Notes
+
+- Release date: **(December, 5 2022)**
+
+### Fixes
+
+- [PR #5](https://github.com/zscaler/terraform-provider-zia/pull/5) Updated template to support latest NSS VHD image 5.1.0
+- [PR #5](https://github.com/zscaler/terraform-provider-zia/pull/5) Added support for VHD image download across multiple regions. The template now allows the selection of which Zscaler Storage account region the VHD image should be transferred from.
+
 ## 1.0.1 (November, 30 2022)
 
 ### Notes
