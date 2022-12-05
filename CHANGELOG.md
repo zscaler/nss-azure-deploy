@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.1.0 (December, 5 2022)
+## 1.0.2 (December, 5 2022)
 
 ### Notes
 
