@@ -164,7 +164,7 @@
     },
     "natGatewayName": {
       "type": "string",
-      "defaultValue": "nssnatgw"
+      "defaultValue": "NSS-NATGW"
     },
     "SKU": {
       "type": "string",
@@ -179,14 +179,19 @@
     "subnetRef2": "[resourceId(parameters('virtualNetworkResourceGroup'), 'Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'),  parameters('subnetName2'))]",
     "gov":"usgovcloudapi",
     "nonGov": "windows",
-    "govDetect": "[if(contains(parameters('vhdRegion'), 'gov'),variables('gov'),variables('nonGov'))]",
+    "govDetect": "[if(contains(parameters('VHDRegion'), 'gov'),variables('gov'),variables('nonGov'))]",
     "nss_disk": "nss-disk",
     "nss": "nss",
     "images": "images",
-    "prefix": "[if(contains(parameters('vhdRegion'), 'gov'),variables('nss_disk'),variables('nss'))]",
-    "prefix_image": "[if(contains(parameters('vhdRegion'), 'zsprodwest'),variables('images'),variables('prefix'))]",
-    "sourceOSvhdURL": "[concat('https://',parameters('vhdRegion'),'.blob.core.',variables('govDetect'),'.net/',variables('prefix_image'),'/znss_5_1_osdisk.vhd')]",
-    "scriptUrl": "https://raw.githubusercontent.com/willguibr/nss-azure-deploy/master/scripts/copyvhd.ps1",
+    "prefix": "[if(contains(parameters('VHDRegion'), 'gov'),variables('nss_disk'),variables('nss'))]",
+    "prefix_image": "[if(contains(parameters('VHDRegion'), 'zsprodwest'),variables('images'),variables('prefix'))]",
+    "default_image_name": "znss_5_1_osdisk.vhd",
+    "zsprodau_image_name": "znss_5_1_au_osdisk.vhd",
+    "zsprodeu_image_name": "znss_5_1_eu_osdisk.vhd",
+    "auimage_name":"[if(contains(parameters('VHDRegion'), 'zsprodau'),variables('zsprodau_image_name'),variables('default_image_name'))]",
+    "image_name":"[if(contains(parameters('VHDRegion'), 'zsprodeu'),variables('zsprodeu_image_name'),variables('auimage_name'))]",
+    "sourceOSvhdURL": "[concat('https://',parameters('VHDRegion'),'.blob.core.',variables('govDetect'),'.net/',variables('prefix_image'),'/',variables('image_name'))]",
+    "scriptUrl": "https://raw.githubusercontent.com/zscaler/nss-azure-deploy/master/scripts/copyvhd.ps1",
     "vhdStorageAccountNamePrefix": "vhdstorage",
     "vhdStorageAccountName": "[if(equals(parameters('stgNewOrExisting'), 'new'), toLower(concat(variables('vhdStorageAccountNamePrefix'), uniqueString(subscription().id, resourceGroup().id, deployment().name))), parameters('nameStorageAccount'))]",
     "vhdStorageAccountSKU": "Standard_LRS",
