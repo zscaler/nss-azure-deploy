@@ -222,15 +222,22 @@
       "type": "Microsoft.Storage/storageAccounts",
       "name": "[variables('vhdStorageAccountName')]",
       "location": "[parameters('location')]",
-      "apiVersion": "2021-09-01",
+      "apiVersion": "2022-05-01",
       "sku": {
         "name": "[variables('vhdStorageAccountSKU')]"
+      },
+        "properties": {
+          "allowBlobPublicAccess": false,
+          "supportsHttpsTrafficOnly": true,
+          "networkAcls": {
+            "defaultAction": "Deny"
+        }
       },
       "dependsOn": [],
       "kind": "StorageV2",
       "resources": [
         {
-          "apiVersion": "2021-09-01",
+          "apiVersion": "2022-05-01",
           "type": "Microsoft.Storage/storageAccounts/blobServices/containers",
           "name": "[concat(variables('vhdStorageAccountName'),'/default/', variables('vhdStorageAccountContainerName'))]",
           "dependsOn": [
@@ -756,7 +763,7 @@
     },
     {
       "type": "Microsoft.Compute/virtualMachines",
-      "apiVersion": "2021-11-01",
+      "apiVersion": "2022-03-01",
       "name": "[parameters('vmName')]",
       "location": "[parameters('location')]",
       "dependsOn": [
