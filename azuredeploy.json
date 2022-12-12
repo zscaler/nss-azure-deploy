@@ -226,13 +226,6 @@
       "sku": {
         "name": "[variables('vhdStorageAccountSKU')]"
       },
-        "properties": {
-          "allowBlobPublicAccess": false,
-          "supportsHttpsTrafficOnly": true,
-          "networkAcls": {
-            "defaultAction": "Deny"
-        }
-      },
       "dependsOn": [],
       "kind": "StorageV2",
       "resources": [
