@@ -234,7 +234,7 @@
         }
       },
       "dependsOn": [],
-      "kind": "StorageV2",
+      "kind": "BlobStorage",
       "resources": [
         {
           "apiVersion": "2022-05-01",
