@@ -11,6 +11,9 @@
     "SAS-Token": {
       "value": "sas-token-value"
     },
+    "vhdRegion": {
+      "value": "vhd-region-value"
+    },
     "stgNewOrExisting": {
       "value": "new"
     },
