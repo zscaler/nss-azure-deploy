@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.0.3 (December, 6 2022)
+
+### Notes
+
+- Release date: **(December,6 2022)**
+
+### Fixes
+
+- [PR #6](https://github.com/zscaler/nss-azure-deploy/pull/6) Fixed Network Security Group Association
+- [PR #6](https://github.com/zscaler/nss-azure-deploy/pull/6) Updated Zscaler-Iac-Action to v1.3.0
+
 ## 1.0.2 (December, 5 2022)
 
 ### Notes
