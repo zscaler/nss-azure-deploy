@@ -189,7 +189,7 @@
     "auimage_name":"[if(contains(parameters('vhdRegion'), 'zsprodau'),variables('zsprodau_image_name'),variables('default_image_name'))]",
     "image_name":"[if(contains(parameters('vhdRegion'), 'zsprodeu'),variables('zsprodeu_image_name'),variables('auimage_name'))]",
     "sourceOSvhdURL": "[concat('https://',parameters('vhdRegion'),'.blob.core.',variables('govDetect'),'.net/',variables('prefix_image'),'/',variables('image_name'))]",
-    "scriptUrl": "https://raw.githubusercontent.com/willguibr/nss-azure-deploy/master/scripts/copyvhd.ps1",
+    "scriptUrl": "https://raw.githubusercontent.com/zscaler/nss-azure-deploy/master/scripts/copyvhd.ps1",
     "vhdStorageAccountNamePrefix": "vhdstorage",
     "vhdStorageAccountName": "[if(equals(parameters('stgNewOrExisting'), 'new'), toLower(concat(variables('vhdStorageAccountNamePrefix'), uniqueString(subscription().id, resourceGroup().id, deployment().name))), parameters('nameStorageAccount'))]",
     "vhdStorageAccountSKU": "Standard_LRS",
