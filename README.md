@@ -53,11 +53,9 @@ The NSS VM carries 2 Network Interfaces. The primary interface is used for manag
 
 Zscaler hosts its VHD images in multiple storage accounts across different regions. This template is configured in way, where the administrator can select which region, the VHD image must be tranferred from. We recommend that you select the storage closer to the region where the resource group and storage account will be located. The following options are available in the drop down menu when deploying the template via the Azure Template wizard:
 
-- ``zsprod``: North America Region
-- ``zsprodau``: Australia Region
-- ``zsprodeu``: Europe Region
-- ``zsprodwestus``: Western USA
-- ``zsprodwesteu``: Western Europe
+- ``znssprod``: North America Region
+- ``znssprodeu``: Europe Region
+- ``znssprodau``:  Australia Region
 
 The following options must be used specifically by Governement customers.
 
