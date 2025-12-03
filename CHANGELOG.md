@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.5 (December, 3 2025)
+
+### Notes
+
+- Release date: **(December,3 2025)**
+
+### Fixes
+
+- [PR #11](https://github.com/zscaler/nss-azure-deploy/issues/11) Updated template to support latest NSS VHD image 5.2.0
+
 ## 1.0.3 (December, 6 2022)
 
 ### Notes
@@ -43,3 +53,4 @@
 * Updated README page with new Azure ARM Deploy logo button
 * Added GitHub Actions for IaC scanning via [Zscaler Posture Control (ZPC)](https://www.zscaler.com/products/posture-control)
 * Added [Semantic-Release](https://semantic-release.gitbook.io/semantic-release/) for versioning control
+
