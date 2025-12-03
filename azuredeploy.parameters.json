@@ -2,29 +2,56 @@
   "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
+    "location": {
+      "value": "x"
+    },
     "vmName": {
-      "value": "GEN-UNIQUE-10"
+      "value": "x"
     },
     "virtualMachineSize": {
       "value": "Standard_D2_v4"
     },
-    "SAS-Token": {
-      "value": "sas-token-value"
+    "sasToken": {
+      "value": "x"
     },
     "vhdRegion": {
-      "value": "vhd-region-value"
+      "value": "znssprod"
     },
     "stgNewOrExisting": {
       "value": "new"
     },
-    "vnetNewOrExisting": {
-      "value": "new"
+    "nameStorageAccount": {
+      "value": "x"
+    },
+    "vNetNewOrExisting": {
+      "value": "existing"
     },
     "virtualNetworkName": {
-      "value": "GET-PREREQ-virtualNetworkName"
+      "value": "xx"
     },
-    "existingStorageAccount": {
-      "value": "exisitingstgname"
+    "virtualNetworkResourceGroup": {
+      "value": "x"
+    },
+    "vNetAddressRange": {
+      "value": "x"
+    },
+    "subnetName": {
+      "value": "x"
+    },
+    "subnetName2": {
+      "value": "x"
+    },
+    "subnetAddressRange": {
+      "value": "x"
+    },
+    "subnetAddressRange2": {
+      "value": "x"
+    },
+    "publicIpSku": {
+      "value": "Standard"
+    },
+    "sshSourceAddressPrefix": {
+      "value": "*"
     }
   }
 }
